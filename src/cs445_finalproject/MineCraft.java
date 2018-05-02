@@ -3,6 +3,11 @@
  * Jerahmeel Calma
  * Awais Ibrahim
  */
+import org.lwjgl.input.Keyboard; 
+import org.lwjgl.opengl.Display; 
+import org.lwjgl.opengl.DisplayMode; 
+import static org.lwjgl.opengl.GL11.*; 
+import org.lwjgl.util.glu.GLU;
 
 public class MineCraft {
 
