@@ -67,8 +67,8 @@ public class MineCraft {
     //method: main
     //purpose: creates an object for the program; allows the program to run
     public static void main(String[] args) {
-        Basic3D basic = new Basic3D();
-        basic.start();
+        MineCraft mineCraft = new MineCraft();
+        mineCraft.start();
     }
     
 }
