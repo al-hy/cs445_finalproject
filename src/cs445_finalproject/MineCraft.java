@@ -50,6 +50,5 @@ public class MineCraft {
     public static void main(String[] args) {
         Basic3D basic = new Basic3D();
         basic.start();
-    }
     
 }
