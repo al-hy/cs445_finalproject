@@ -12,6 +12,8 @@
 *
 ****************************************************************/
 
+package cs445_finalproject;
+
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.input.Keyboard; 
 import org.lwjgl.input.Mouse;
@@ -31,7 +33,8 @@ public class FPCameraController {
     private Vector3Float me;
     
     public FPCameraController(float x, float y, float z) {
-        //instantiate position Vector3f to the x y z params. position = new Vector3f(x, y, z);
+        //instantiate position Vector3f to the x y z params. 
+        position = new Vector3f(x, y, z);
         lPosition = new Vector3f(x,y,z);
         lPosition.x = 0f;
         lPosition.y = 15f;
@@ -52,28 +55,32 @@ public class FPCameraController {
     
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
-        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); position.x -= xOffset;
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
+        position.x -= xOffset;
         position.z += zOffset;
     }
     
     //moves the camera backward relative to its current rotation (yaw) 
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
-        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); position.x += xOffset;
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
+        position.x += xOffset;
         position.z -= zOffset;
     }
     
     //strafes the camera left relative to its current rotation (yaw) 
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
-        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); position.x -= xOffset;
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
+        position.x -= xOffset;
         position.z += zOffset;
     }
     
      //strafes the camera right relative to its current rotation (yaw) 
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
-        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); position.x -= xOffset;
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
+        position.x -= xOffset;
         position.z += zOffset;
     }
     
@@ -155,11 +162,15 @@ public class FPCameraController {
                 camera.moveDown(movementSpeed); 
             }
             
-            //set the modelview matrix back to the identity glLoadIdentity();
-            //look through the camera before you draw anything camera.lookThrough();
+            //set the modelview matrix back to the identity 
+            glLoadIdentity();
+            //look through the camera before you draw anything 
+            camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //you would draw your scene here.
             render();
-            //draw the buffer to the screen Display.update(); Display.sync(60);
+            //draw the buffer to the screen 
+            Display.update();
+            Display.sync(60);
             }
             Display.destroy();
       }
@@ -167,12 +178,89 @@ public class FPCameraController {
     private void render() { 
         try{
             glBegin(GL_QUADS);
-            glColor3f(1.0f,0.0f,1.0f);
-            glVertex3f( 1.0f,-1.0f,-1.0f);
-            glVertex3f(-1.0f,-1.0f,-1.0f);
+            glColor3f(0.5f,0.5f,0.5f);
+            //Top
+            glColor3f(0.0f,0.0f,1.0f); 
+            glVertex3f( 1.0f, 1.0f,-1.0f);
             glVertex3f(-1.0f, 1.0f,-1.0f);
+            glVertex3f(-1.0f, 1.0f, 1.0f);
+            glVertex3f( 1.0f, 1.0f, 1.0f);
+            //Bottom
+            glVertex3f( 1.0f,-1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f( 1.0f,-1.0f,-1.0f);
+            //Front
+            glVertex3f( 1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f, 1.0f);
+            //Back
+            glVertex3f( 1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f, 1.0f,-1.0f);
+            glVertex3f( 1.0f, 1.0f,-1.0f);
+            //Left
+            glVertex3f(-1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f, 1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f);
+            //Right
             glVertex3f( 1.0f, 1.0f,-1.0f); 
+            glVertex3f( 1.0f, 1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f,-1.0f);
             glEnd();
+            
+            glBegin(GL_LINE_LOOP);
+            //Top 
+            glColor3f(0.0f,0.0f,0.0f); 
+            glVertex3f( 1.0f, 1.0f,-1.0f); 
+            glVertex3f(-1.0f, 1.0f,-1.0f); 
+            glVertex3f(-1.0f, 1.0f, 1.0f); 
+            glVertex3f( 1.0f, 1.0f, 1.0f);
+            glEnd();
+            
+            glBegin(GL_LINE_LOOP); 
+            //Bottom
+            glVertex3f( 1.0f,-1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f( 1.0f,-1.0f,-1.0f);
+            glEnd(); 
+            
+            glBegin(GL_LINE_LOOP);
+            //Front
+            glVertex3f( 1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f, 1.0f);
+            glEnd();
+            
+            glBegin(GL_LINE_LOOP);      
+            //Back
+            glVertex3f( 1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f, 1.0f,-1.0f); 
+            glVertex3f( 1.0f, 1.0f,-1.0f);
+            glEnd(); 
+            
+            glBegin(GL_LINE_LOOP);
+            //Left
+            glVertex3f(-1.0f, 1.0f, 1.0f); 
+            glVertex3f(-1.0f, 1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f,-1.0f); 
+            glVertex3f(-1.0f,-1.0f, 1.0f);
+            glEnd();
+            
+            glBegin(GL_LINE_LOOP);
+            //Right
+            glVertex3f( 1.0f, 1.0f,-1.0f); 
+            glVertex3f( 1.0f, 1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f, 1.0f); 
+            glVertex3f( 1.0f,-1.0f,-1.0f);
+            glEnd();
+            
         }catch(Exception e){
             e.printStackTrace();
         } 

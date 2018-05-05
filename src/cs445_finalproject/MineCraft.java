@@ -11,6 +11,7 @@
 * the camera using the mouse and keyboard.
 *
 ****************************************************************/
+package cs445_finalproject;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -62,6 +63,7 @@ public class MineCraft {
         GLU.gluPerspective(100.0f, (float) displayMode.getWidth() / (float) displayMode.getHeight(), 0.1f, 300.0f);
         glMatrixMode(GL_MODELVIEW);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+        glEnable(GL_DEPTH_TEST);
     }
     
     //method: main

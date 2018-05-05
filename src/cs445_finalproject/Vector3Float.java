@@ -9,6 +9,7 @@
 * purpose: An object to hold our camera’s position in 3D space.
 *
 ****************************************************************/
+package cs445_finalproject;
 
 public class Vector3Float {
     public float x, y, z;
