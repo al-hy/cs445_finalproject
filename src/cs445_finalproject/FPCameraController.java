@@ -158,7 +158,7 @@ public class FPCameraController {
                 camera.moveUp(movementSpeed);
             }
             
-            if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
                 camera.moveDown(movementSpeed); 
             }
             
@@ -180,40 +180,40 @@ public class FPCameraController {
             glBegin(GL_QUADS);
             //Top
             glColor3f(0.0f,0.0f,1.0f); 
-            glVertex3f( 1.0f, 1.0f,-1.0f);
-            glVertex3f(-1.0f, 1.0f,-1.0f);
-            glVertex3f(-1.0f, 1.0f, 1.0f);
-            glVertex3f( 1.0f, 1.0f, 1.0f);
+            glVertex3f( 2.0f, 2.0f, -2.0f);
+            glVertex3f(-2.0f, 2.0f, -2.0f);
+            glVertex3f(-2.0f, 2.0f, 2.0f);
+            glVertex3f( 2.0f, 2.0f, 2.0f);
             //Bottom
             glColor3f(1.0f,0.0f,0.0f);
-            glVertex3f( 1.0f,-1.0f, 1.0f); 
-            glVertex3f(-1.0f,-1.0f, 1.0f); 
-            glVertex3f(-1.0f,-1.0f,-1.0f); 
-            glVertex3f( 1.0f,-1.0f,-1.0f);
+            glVertex3f( 2.0f,-2.0f, 2.0f); 
+            glVertex3f(-2.0f,-2.0f, 2.0f); 
+            glVertex3f(-2.0f,-2.0f,-2.0f); 
+            glVertex3f( 2.0f,-2.0f,-2.0f);
             //Front
             glColor3f(0.0f,1.0f,0.0f);
-            glVertex3f( 1.0f, 1.0f, 1.0f); 
-            glVertex3f(-1.0f, 1.0f, 1.0f); 
-            glVertex3f(-1.0f,-1.0f, 1.0f); 
-            glVertex3f( 1.0f,-1.0f, 1.0f);
+            glVertex3f( 2.0f, 2.0f, 2.0f); 
+            glVertex3f(-2.0f, 2.0f, 2.0f); 
+            glVertex3f(-2.0f,-2.0f, 2.0f); 
+            glVertex3f( 2.0f,-2.0f, 2.0f);
             //Back
             glColor3f(1.0f,1.0f,0.0f);
-            glVertex3f( 1.0f,-1.0f,-1.0f); 
-            glVertex3f(-1.0f,-1.0f,-1.0f); 
-            glVertex3f(-1.0f, 1.0f,-1.0f);
-            glVertex3f( 1.0f, 1.0f,-1.0f);
+            glVertex3f( 2.0f,-2.0f,-2.0f); 
+            glVertex3f(-2.0f,-2.0f,-2.0f); 
+            glVertex3f(-2.0f, 2.0f,-2.0f);
+            glVertex3f( 2.0f, 2.0f,-2.0f);
             //Left
             glColor3f(1.0f,0.0f,1.0f);
-            glVertex3f(-1.0f, 1.0f, 1.0f); 
-            glVertex3f(-1.0f, 1.0f,-1.0f); 
-            glVertex3f(-1.0f,-1.0f,-1.0f); 
-            glVertex3f(-1.0f,-1.0f, 1.0f);
+            glVertex3f(-2.0f, 2.0f, 2.0f); 
+            glVertex3f(-2.0f, 2.0f,-2.0f); 
+            glVertex3f(-2.0f,-2.0f,-2.0f); 
+            glVertex3f(-2.0f,-2.0f, 2.0f);
             //Right
             glColor3f(0.0f,1.0f,1.0f);
-            glVertex3f( 1.0f, 1.0f,-1.0f); 
-            glVertex3f( 1.0f, 1.0f, 1.0f); 
-            glVertex3f( 1.0f,-1.0f, 1.0f); 
-            glVertex3f( 1.0f,-1.0f,-1.0f);
+            glVertex3f( 2.0f, 2.0f,-2.0f); 
+            glVertex3f( 2.0f, 2.0f, 2.0f); 
+            glVertex3f( 2.0f,-2.0f, 2.0f); 
+            glVertex3f( 2.0f,-2.0f,-2.0f);
             glEnd();   
         }catch(Exception e){
             e.printStackTrace();
