@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/02/18
+* date last modified: 05/06/18
 *
 * purpose: An object to hold our camera’s position in 3D space.
 *

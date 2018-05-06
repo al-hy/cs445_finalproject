@@ -4,11 +4,11 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/02/18
+* date last modified: 05/06/18
 *
-* purpose: Creates a 640 x 480 window that allows the user to 
-* view a cube with six different colored sides. The user can move
-* the camera using the mouse and keyboard.
+* purpose: Moves the camera's position using the keys w, a, s, d, 
+* left shift, and space. Moves the camera's view on a point using 
+* the mouse.
 *
 ****************************************************************/
 
@@ -35,14 +35,14 @@ public class FPCameraController {
     public FPCameraController(float x, float y, float z) {
         //instantiate position Vector3f to the x y z params. 
         position = new Vector3f(x, y, z);
-        lPosition = new Vector3f(x,y,z);
+        lPosition = new Vector3f(x, y, z);
         lPosition.x = 0f;
         lPosition.y = 15f;
         lPosition.z = 0f; 
     }
     
     //increment the camera's current yaw rotation 
-    public void yaw(float amount){
+    public void yaw(float amount) {
         //increment the yaw by the amount param
         yaw += amount; 
     }
@@ -76,7 +76,7 @@ public class FPCameraController {
         position.z += zOffset;
     }
     
-     //strafes the camera right relative to its current rotation (yaw) 
+    //strafes the camera right relative to its current rotation (yaw) 
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
@@ -116,7 +116,7 @@ public class FPCameraController {
         Mouse.setGrabbed(true);
         
         // keep looping till the display window is closed the ESC key is down 
-        while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+        while(!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             time = Sys.getTime(); 
             lastTime = time;
             //distance in mouse movement //from the last getDX() call.
@@ -134,32 +134,35 @@ public class FPCameraController {
             //we times the movementSpeed with dt this is a time scale
             //so if its a slow frame u move more then a fast frame
             //so on a slow computer you move just as fast as on a fast computer
+            
             //move forward
-            if (Keyboard.isKeyDown(Keyboard.KEY_W)){
+            if(Keyboard.isKeyDown(Keyboard.KEY_W)){
                 camera.walkForward(movementSpeed); 
             }
             
             //move backwards 
-            if (Keyboard.isKeyDown(Keyboard.KEY_S)){
+            if(Keyboard.isKeyDown(Keyboard.KEY_S)){
                 camera.walkBackwards(movementSpeed); 
             }
+            
             //strafe left 
-            if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+            if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
                 camera.strafeLeft(movementSpeed);
             }
-            //strafe right
             
-            if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+            //strafe right
+            if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
                 camera.strafeRight(movementSpeed); 
             }
             
             //move up 
-            if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) { 
+            if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) { 
                 camera.moveUp(movementSpeed);
             }
             
-            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-                camera.moveDown(movementSpeed); 
+            //move down
+            if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+                camera.moveDown(movementSpeed);
             }
             
             //set the modelview matrix back to the identity 
@@ -171,51 +174,51 @@ public class FPCameraController {
             //draw the buffer to the screen 
             Display.update();
             Display.sync(60);
-            }
-            Display.destroy();
+        }
+        Display.destroy();
       }
     
     private void render() { 
-        try{
+        try {
             glBegin(GL_QUADS);
-            //Top
+            //Top square
             glColor3f(0.0f,0.0f,1.0f); 
-            glVertex3f( 2.0f, 2.0f, -2.0f);
+            glVertex3f(2.0f, 2.0f, -2.0f);
             glVertex3f(-2.0f, 2.0f, -2.0f);
             glVertex3f(-2.0f, 2.0f, 2.0f);
-            glVertex3f( 2.0f, 2.0f, 2.0f);
-            //Bottom
-            glColor3f(1.0f,0.0f,0.0f);
-            glVertex3f( 2.0f,-2.0f, 2.0f); 
-            glVertex3f(-2.0f,-2.0f, 2.0f); 
-            glVertex3f(-2.0f,-2.0f,-2.0f); 
-            glVertex3f( 2.0f,-2.0f,-2.0f);
-            //Front
+            glVertex3f(2.0f, 2.0f, 2.0f);
+            //Bottom square
+            glColor3f(1.0f, 0.0f, 0.0f);
+            glVertex3f(2.0f, -2.0f, 2.0f); 
+            glVertex3f(-2.0f, -2.0f, 2.0f); 
+            glVertex3f(-2.0f, -2.0f, -2.0f); 
+            glVertex3f(2.0f, -2.0f, -2.0f);
+            //Front square
             glColor3f(0.0f,1.0f,0.0f);
             glVertex3f( 2.0f, 2.0f, 2.0f); 
             glVertex3f(-2.0f, 2.0f, 2.0f); 
-            glVertex3f(-2.0f,-2.0f, 2.0f); 
-            glVertex3f( 2.0f,-2.0f, 2.0f);
-            //Back
-            glColor3f(1.0f,1.0f,0.0f);
-            glVertex3f( 2.0f,-2.0f,-2.0f); 
-            glVertex3f(-2.0f,-2.0f,-2.0f); 
-            glVertex3f(-2.0f, 2.0f,-2.0f);
-            glVertex3f( 2.0f, 2.0f,-2.0f);
-            //Left
-            glColor3f(1.0f,0.0f,1.0f);
+            glVertex3f(-2.0f, -2.0f, 2.0f); 
+            glVertex3f( 2.0f, -2.0f, 2.0f);
+            //Back square
+            glColor3f(1.0f, 1.0f, 0.0f);
+            glVertex3f(2.0f, -2.0f, -2.0f); 
+            glVertex3f(-2.0f, -2.0f, -2.0f); 
+            glVertex3f(-2.0f, 2.0f, -2.0f);
+            glVertex3f(2.0f, 2.0f, -2.0f);
+            //Left square
+            glColor3f(1.0f, 0.0f, 1.0f);
             glVertex3f(-2.0f, 2.0f, 2.0f); 
-            glVertex3f(-2.0f, 2.0f,-2.0f); 
-            glVertex3f(-2.0f,-2.0f,-2.0f); 
-            glVertex3f(-2.0f,-2.0f, 2.0f);
-            //Right
-            glColor3f(0.0f,1.0f,1.0f);
-            glVertex3f( 2.0f, 2.0f,-2.0f); 
-            glVertex3f( 2.0f, 2.0f, 2.0f); 
-            glVertex3f( 2.0f,-2.0f, 2.0f); 
-            glVertex3f( 2.0f,-2.0f,-2.0f);
+            glVertex3f(-2.0f, 2.0f, -2.0f); 
+            glVertex3f(-2.0f, -2.0f, -2.0f); 
+            glVertex3f(-2.0f, -2.0f, 2.0f);
+            //Right square
+            glColor3f(0.0f, 1.0f, 1.0f);
+            glVertex3f(2.0f, 2.0f, -2.0f); 
+            glVertex3f(2.0f, 2.0f, 2.0f); 
+            glVertex3f(2.0f, -2.0f, 2.0f); 
+            glVertex3f(2.0f, -2.0f, -2.0f);
             glEnd();   
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         } 
     }
