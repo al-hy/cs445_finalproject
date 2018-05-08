@@ -13,9 +13,12 @@ package cs445_finalproject;
 
 public class Vector3Float {
     public float x, y, z;
+    
+    //constructor: Vector3fFloat
+    //purpose: initializes the x, y, and z values of a vector
     public Vector3Float(int x, int y, int z) {
-        this.x=x;
-        this.y=y;
-        this.z=z;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 }

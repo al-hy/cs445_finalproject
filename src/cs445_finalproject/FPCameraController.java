@@ -32,6 +32,8 @@ public class FPCameraController {
     private float pitch = 0.0f;
     private Vector3Float me;
     
+    //constructor: FPCameraController
+    //purpose: initializes the instance variables of FPCameraController
     public FPCameraController(float x, float y, float z) {
         //instantiate position Vector3f to the x y z params. 
         position = new Vector3f(x, y, z);
@@ -41,18 +43,22 @@ public class FPCameraController {
         lPosition.z = 0f; 
     }
     
-    //increment the camera's current yaw rotation 
+    //method: yaw
+    //purpose: increment the camera's current yaw rotation 
     public void yaw(float amount) {
         //increment the yaw by the amount param
         yaw += amount; 
     }
     
-    //increment the camera's current yaw rotation 
+    //method: pitch
+    //purpose: increment the camera's current yaw rotation 
     public void pitch(float amount) {
         //increment the pitch by the amount param
         pitch -= amount; 
     }
     
+    //method: walkForward
+    //purpose: moves the camera forward in the direction it is facing
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
@@ -60,7 +66,8 @@ public class FPCameraController {
         position.z += zOffset;
     }
     
-    //moves the camera backward relative to its current rotation (yaw) 
+    //method: walkBackwards
+    //purpose: moves the camera backward relative to its current rotation (yaw) 
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
@@ -68,7 +75,8 @@ public class FPCameraController {
         position.z -= zOffset;
     }
     
-    //strafes the camera left relative to its current rotation (yaw) 
+    //method: strafeLeft
+    //purpose: strafes the camera left relative to its current rotation (yaw) 
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
@@ -76,7 +84,8 @@ public class FPCameraController {
         position.z += zOffset;
     }
     
-    //strafes the camera right relative to its current rotation (yaw) 
+    //method: strafeRight
+    //purpose: strafes the camera right relative to its current rotation (yaw) 
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
@@ -84,17 +93,20 @@ public class FPCameraController {
         position.z += zOffset;
     }
     
-    //moves the camera up relative to its current rotation (yaw) 
+    //method: moveUp
+    //purpose: moves the camera up relative to its current rotation (yaw) 
     public void moveUp(float distance) {
         position.y -= distance; 
     }
     
-    //moves the camera down
+    //method: moveDown
+    //purpose: moves the camera down
     public void moveDown(float distance) {
         position.y += distance; 
     }
     
-    //translates and rotate the matrix so that it looks through the camera //this does basically what gluLookAt() does
+    //method: lookThrough
+    //purpose: translates and rotate the matrix so that it looks through the camera //this does basically what gluLookAt() does
     public void lookThrough() {
         //roatate the pitch around the X axis 
         glRotatef(pitch, 1.0f, 0.0f, 0.0f);
@@ -104,6 +116,8 @@ public class FPCameraController {
         glTranslatef(position.x, position.y, position.z);
     }
     
+    //method: gameLoop
+    //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(0, 0, 0);
         float dx = 0.0f;
@@ -124,10 +138,10 @@ public class FPCameraController {
             //distance in mouse movement //from the last getDY() call.
             dy = Mouse.getDY();
             
-            //controll camera yaw from x movement fromt the mouse 
+            //controll camera yaw from x movement from the mouse 
             camera.yaw(dx * mouseSensitivity);
             
-            //controll camera pitch from y movement fromt the mouse 
+            //controll camera pitch from y movement from the mouse 
             camera.pitch(dy * mouseSensitivity);
             
             //when passing in the distance to move
@@ -178,6 +192,8 @@ public class FPCameraController {
         Display.destroy();
       }
     
+    //method: render
+    //purpose: draws a cube of width 2 and with each side a different color
     private void render() { 
         try {
             glBegin(GL_QUADS);
