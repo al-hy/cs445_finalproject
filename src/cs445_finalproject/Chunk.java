@@ -107,11 +107,17 @@ public class Chunk {
     private float[] getCubeColor(Block block) {
         switch(block.getID()) {
             case 1:
-                return new float[] { 0, 1, 0 };
+                return new float[] { 1f, 0, 0 };
             case 2:
-                return new float[] { 1, 0.5f, 0 };
+                return new float[] { 0, 1f, 0 };
             case 3:
-                return new float[] { 0, 0f, 1f };
+                return new float[] { 0, 0, 1f };
+            case 4:
+                return new float[] { 1f, 0, 1f };
+            case 5:
+                return new float[] { 1f, 1f, 0 };
+            case 6:
+                return new float[] { 0, 1f, 1f };
         }
         return new float[] { 1, 1, 1 };
     }
