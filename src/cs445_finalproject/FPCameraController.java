@@ -31,6 +31,7 @@ public class FPCameraController {
     //the rotation around the X axis of the camera 
     private float pitch = 0.0f;
     private Vector3Float me;
+    Chunk chunk;
     
     //constructor: FPCameraController
     //purpose: initializes the instance variables of FPCameraController
@@ -40,7 +41,7 @@ public class FPCameraController {
         lPosition = new Vector3f(x, y, z);
         lPosition.x = 0f;
         lPosition.y = 15f;
-        lPosition.z = 0f; 
+        lPosition.z = 0f;
     }
     
     //method: yaw
@@ -120,6 +121,7 @@ public class FPCameraController {
     //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(0, 0, 0);
+        chunk = new Chunk(0,0,0);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f;
@@ -184,7 +186,7 @@ public class FPCameraController {
             //look through the camera before you draw anything 
             camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //you would draw your scene here.
-            render();
+            chunk.render();
             //draw the buffer to the screen 
             Display.update();
             Display.sync(60);

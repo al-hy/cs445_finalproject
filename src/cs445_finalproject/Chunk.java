@@ -29,7 +29,6 @@ public class Chunk {
     
     public void render() { 
         glPushMatrix();
-            glPushMatrix();
             glBindBuffer(GL_ARRAY_BUFFER, VBOVertexHandle);
             glVertexPointer(3, GL_FLOAT, 0, 0L);
             glBindBuffer(GL_ARRAY_BUFFER, VBOColorHandle);

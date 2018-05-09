@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.util.glu.GLU;
 
 public class MineCraft {
-    private FPCameraController fp = new FPCameraController(0f,0f,0f);
+    private FPCameraController fp;
     private DisplayMode displayMode;
     
     //method: start
@@ -29,6 +29,7 @@ public class MineCraft {
         try {
             createWindow();
             initGL();
+            fp = new FPCameraController(0f,0f,0f);
             fp.gameLoop();//render();
         } catch (Exception e) {
             e.printStackTrace();
