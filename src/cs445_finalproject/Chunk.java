@@ -142,8 +142,10 @@ public class Chunk {
         
         float offset = (1024f/16)/1024f;
         
+        System.out.println(block.getID());
         switch (block.getID()) {
             case 1:
+                //Grass Texture
                 return new float[] {
                   //BOTTOM QUAD(DOWN=+y 
                     x+offset*3, y+offset*10,
@@ -175,6 +177,143 @@ public class Chunk {
                     x+offset*4, y+offset*0,
                     x+offset*4, y+offset*1,
                     x+offset*3, y+offset*1
+                };
+                
+            case 2: 
+                //Sand Texture
+                return new float[] {
+                  //BOTTOM QUAD(DOWN=+y 
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1,
+                    //TOP!
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1,
+                    //FRONT QUAD
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1,
+                    //BACK QUAD
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1,
+                    //LEFT QUAD
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1,
+                    //RIGHT QUAD
+                    x+offset*3, y+offset*2,
+                    x+offset*2, y+offset*2,
+                    x+offset*2, y+offset*1,
+                    x+offset*3, y+offset*1
+                };
+            case 3:
+                //Dirt Texture
+                return new float[] {
+                  //BOTTOM QUAD(DOWN=+y 
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0,
+                    //TOP!
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0,
+                    //FRONT QUAD
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0,
+                    //BACK QUAD
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0,
+                    //LEFT QUAD
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0,
+                    //RIGHT QUAD
+                    x+offset*3, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    x+offset*2, y+offset*0,
+                    x+offset*3, y+offset*0
+                };
+            case 4: 
+                //Stone Texture
+                return new float[] {
+                  //BOTTOM QUAD(DOWN=+y 
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1,
+                    //TOP!
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1,
+                    //FRONT QUAD
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1,
+                    //BACK QUAD
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1,
+                    //LEFT QUAD
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1,
+                    //RIGHT QUAD
+                    x+offset*1, y+offset*2,
+                    x+offset*0, y+offset*2,
+                    x+offset*0, y+offset*1,
+                    x+offset*1, y+offset*1
+                };
+            case 5:
+                //Bedrock Texture
+                return new float[] {
+                  //BOTTOM QUAD(DOWN=+y 
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    //TOP!
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    //FRONT QUAD
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    //BACK QUAD
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    //LEFT QUAD
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1,
+                    //RIGHT QUAD
+                    x+offset*2, y+offset*2,
+                    x+offset*1, y+offset*2,
+                    x+offset*1, y+offset*1,
+                    x+offset*2, y+offset*1
                 };
         }
         
