@@ -144,7 +144,7 @@ public class Chunk {
         
         System.out.println(block.getID());
         switch (block.getID()) {
-            case 1:
+            case 0:
                 //Grass Texture
                 return new float[] {
                   //BOTTOM QUAD(DOWN=+y 
@@ -179,7 +179,7 @@ public class Chunk {
                     x+offset*3, y+offset*1
                 };
                 
-            case 2: 
+            case 1: 
                 //Sand Texture
                 return new float[] {
                   //BOTTOM QUAD(DOWN=+y 
@@ -212,6 +212,40 @@ public class Chunk {
                     x+offset*2, y+offset*2,
                     x+offset*2, y+offset*1,
                     x+offset*3, y+offset*1
+                };
+            case 2:
+                //Water Texture
+                return new float[] {
+                  //BOTTOM QUAD(DOWN=+y 
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11,
+                    //TOP!
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11,
+                    //FRONT QUAD
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11,
+                    //BACK QUAD
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11,
+                    //LEFT QUAD
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11,
+                    //RIGHT QUAD
+                    x+offset*3, y+offset*12,
+                    x+offset*2, y+offset*12,
+                    x+offset*2, y+offset*11,
+                    x+offset*3, y+offset*11
                 };
             case 3:
                 //Dirt Texture
