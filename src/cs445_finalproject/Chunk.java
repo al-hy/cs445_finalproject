@@ -6,7 +6,8 @@
 * assignment: Final Project
 * date last modified: 05/07/18
 *
-* purpose: 
+* purpose: An object that holds 30 X 30 X 30 Block objects.
+* Puts textures on each Block.
 *
 ****************************************************************/
 
@@ -24,14 +25,57 @@ import org.newdawn.slick.util.ResourceLoader;
 public class Chunk {
     static final int CHUNK_SIZE = 30;
     static final int CUBE_LENGTH = 2;
-    private Block[][][] Blocks;
+    private Block[][][] blocks;
     private int VBOVertexHandle;
     private int VBOColorHandle;
-    private int StartX, StartY, StartZ;
+    private int startX, startY, startZ;
     private Random r;
     private int VBOTextureHandle;
     private Texture texture;
     
+    //constructor: Chunk
+    //purpose: initializes the instance variables of Chunk
+    public Chunk(int startX, int startY, int startZ) {
+        
+        try {
+            texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("terrain.png")); 
+        }
+        catch(Exception e) {
+            System.out.print("ER-ROAR!");
+        }
+        
+        r = new Random();
+        blocks = new Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
+        for(int x = 0; x < CHUNK_SIZE; x++) {
+            for(int y = 0; y < CHUNK_SIZE; y++) {
+                for(int z = 0; z < CHUNK_SIZE; z++) {
+                    if(r.nextFloat() > 0.7f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
+                    } else if(r.nextFloat() > 0.6f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
+                    } else if(r.nextFloat() > 0.4f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
+                    } else if(r.nextFloat() > 0.2f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
+                    } else if(r.nextFloat() > 0.1f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
+                    } else {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
+                    }
+                }
+            }
+        }
+        VBOColorHandle= glGenBuffers();
+        VBOVertexHandle= glGenBuffers();
+        VBOTextureHandle = glGenBuffers();
+        this.startX = startX;
+        this.startY = startY;
+        this.startZ = startZ;
+        rebuildMesh(startX, startY, startZ);
+    }
+    
+    //method: render
+    //purpose: draws a 30 X 30 X 30 Block object
     public void render() { 
         glPushMatrix();
             glBindBuffer(GL_ARRAY_BUFFER, VBOVertexHandle);
@@ -45,6 +89,8 @@ public class Chunk {
         glPopMatrix();
     }
     
+    //method: rebuildMesh
+    //purpose: creates 30 X 30 X 30 Block object
     public void rebuildMesh(float startX, float startY, float startZ) {
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
@@ -57,8 +103,8 @@ public class Chunk {
                 for(float y = 0; y < CHUNK_SIZE; y++) {
                     VertexPositionData.put(createCube((float) (startX+ x * CUBE_LENGTH), 
                             (float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)), (float) (startZ + z * CUBE_LENGTH)));
-                    VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
-                    VertexTextureData.put(createTexCube((float) 0, (float)0,Blocks[(int)(x)][(int) (y)][(int) (z)]));
+                    VertexColorData.put(createCubeVertexCol(getCubeColor(blocks[(int) x][(int) y][(int) z])));
+                    VertexTextureData.put(createTexCube((float) 0, (float)0,blocks[(int)(x)][(int) (y)][(int) (z)]));
 
                 }
             }
@@ -77,6 +123,8 @@ public class Chunk {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     
+    //method: createCubeVertexCol
+    //purpose: creates an array that stores the color of a cube
     private float[] createCubeVertexCol(float[] CubeColorArray) {
         float[] cubeColors = new float[CubeColorArray.length*4*6];
         for(int i = 0; i < cubeColors.length; i++) {
@@ -85,6 +133,8 @@ public class Chunk {
         return cubeColors;
     }
     
+    //method: createCube
+    //purpose: stores the vertices of a cube in an array
     public static float[] createCube(float x, float y, float z) {
         int offset = CUBE_LENGTH / 2;
         return new float[] {
@@ -120,24 +170,14 @@ public class Chunk {
             x + offset, y - offset, z };
     }
     
+    //method: getCubeColor
+    //purpose: returns default cube color which is white
     private float[] getCubeColor(Block block) {
-//        switch(block.getID()) {
-//            case 1:
-//                return new float[] { 1f, 0, 0 };
-//            case 2:
-//                return new float[] { 0, 1f, 0 };
-//            case 3:
-//                return new float[] { 0, 0, 1f };
-//            case 4:
-//                return new float[] { 1f, 0, 1f };
-//            case 5:
-//                return new float[] { 1f, 1f, 0 };
-//            case 6:
-//                return new float[] { 0, 1f, 1f };
-//        }
         return new float[] { 1, 1, 1 };
     }
     
+    //method: createTexCube
+    //purpose: puts the respective textures on each type of Block
     public static float[] createTexCube(float x, float y, Block block) {
         
         float offset = (1024f/16)/1024f;
@@ -178,7 +218,6 @@ public class Chunk {
                     x+offset*4, y+offset*1,
                     x+offset*3, y+offset*1
                 };
-                
             case 1: 
                 //Sand Texture
                 return new float[] {
@@ -384,42 +423,5 @@ public class Chunk {
                     x+offset*3, y+offset*1
                 };
     }
-    public Chunk(int startX, int startY, int startZ) {
-        
-        try {
-            texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("terrain.png")); 
-        }
-        catch(Exception e) {
-            System.out.print("ER-ROAR!");
-        }
-        
-        r = new Random();
-        Blocks = new Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
-        for(int x = 0; x < CHUNK_SIZE; x++) {
-            for(int y = 0; y < CHUNK_SIZE; y++) {
-                for(int z = 0; z < CHUNK_SIZE; z++) {
-                    if(r.nextFloat() > 0.7f){
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
-                    } else if(r.nextFloat() > 0.6f) {
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
-                    } else if(r.nextFloat() > 0.4f) {
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
-                    } else if(r.nextFloat() > 0.2f) {
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
-                    } else if(r.nextFloat() > 0.1f) {
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
-                    } else {
-                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
-                    }
-                }
-            }
-        }
-        VBOColorHandle= glGenBuffers();
-        VBOVertexHandle= glGenBuffers();
-        VBOTextureHandle = glGenBuffers();
-        StartX= startX;
-        StartY= startY;
-        StartZ= startZ;
-        rebuildMesh(startX, startY, startZ);
-    }
+    
 }
