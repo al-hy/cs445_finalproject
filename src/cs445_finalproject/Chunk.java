@@ -92,6 +92,12 @@ public class Chunk {
     //method: rebuildMesh
     //purpose: creates 30 X 30 X 30 Block object
     public void rebuildMesh(float startX, float startY, float startZ) {
+        double max = 9;
+        double min = 8;
+        double persistence = ((Math.random() * ((max - min) + 1)) + min )/100;
+        System.out.println(persistence);
+        int seed = (int)r.nextDouble();
+        SimplexNoise simplexNoise = new SimplexNoise(CHUNK_SIZE, persistence, seed);
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
         VBOTextureHandle = glGenBuffers();
@@ -101,6 +107,10 @@ public class Chunk {
         for(float x = 0; x < CHUNK_SIZE; x += 1) {
             for(float z = 0; z < CHUNK_SIZE; z += 1) {
                 for(float y = 0; y < CHUNK_SIZE; y++) {
+                    int height = (int) (startY + Math.abs((int)(CHUNK_SIZE * simplexNoise.getNoise((int)x, (int)z))) * CUBE_LENGTH) + 15;
+                    if(y == height) {
+                        break;
+                    }
                     VertexPositionData.put(createCube((float) (startX+ x * CUBE_LENGTH), 
                             (float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)), (float) (startZ + z * CUBE_LENGTH)));
                     VertexColorData.put(createCubeVertexCol(getCubeColor(blocks[(int) x][(int) y][(int) z])));
@@ -181,8 +191,6 @@ public class Chunk {
     public static float[] createTexCube(float x, float y, Block block) {
         
         float offset = (1024f/16)/1024f;
-        
-        System.out.println(block.getID());
         switch (block.getID()) {
             case 0:
                 //Grass Texture
