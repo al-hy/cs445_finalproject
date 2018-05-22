@@ -51,8 +51,10 @@ public class Chunk {
                     float random = r.nextFloat();
                     if(y == 0) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
-                    } else if(y == 14) {
+                    } else if(y == 14 && random < 0.7f) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
+                    } else if(y == 14 && random >= 0.7f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
                     } else if(random > 0.5f && y <= 13) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
                     } else if(random <= 0.5f && y <= 13) {
@@ -92,10 +94,18 @@ public class Chunk {
     //method: rebuildMesh
     //purpose: creates 30 X 30 X 30 Block object
     public void rebuildMesh(float startX, float startY, float startZ) {
+        int sandXmin = r.nextInt(15);
+        int sandXmax = r.nextInt(15)+15;
+        int sandZmin = r.nextInt(15);
+        int sandZmax = r.nextInt(15)+15;
+        
+        int waterXmin = r.nextInt(15);
+        int waterXmax = r.nextInt(15)+15;
+        int waterZmin = r.nextInt(15);
+        int waterZmax = r.nextInt(15)+15;
         double max = 9;
         double min = 8;
         double persistence = ((Math.random() * ((max - min) + 1)) + min )/100;
-        System.out.println(persistence);
         int seed = (int)r.nextDouble();
         SimplexNoise simplexNoise = new SimplexNoise(CHUNK_SIZE, persistence, seed);
         VBOColorHandle = glGenBuffers();
@@ -110,6 +120,13 @@ public class Chunk {
                     int height = (int) (startY + Math.abs((int)(CHUNK_SIZE * simplexNoise.getNoise((int)x, (int)z))) * CUBE_LENGTH) + 15;
                     if(y == height) {
                         break;
+                    }
+                    //Generate Grass at the top layer
+                    if(y == height -1 && y != 14){
+                        blocks[(int)x][(int)y][(int)z] = new Block(Block.BlockType.BlockType_Grass);
+                    }
+                    if(y == height -2){
+                        blocks[(int)x][(int)y][(int)z] = new Block(Block.BlockType.BlockType_Dirt);
                     }
                     VertexPositionData.put(createCube((float) (startX+ x * CUBE_LENGTH), 
                             (float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)), (float) (startZ + z * CUBE_LENGTH)));
