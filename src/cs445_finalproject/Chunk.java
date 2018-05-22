@@ -94,15 +94,6 @@ public class Chunk {
     //method: rebuildMesh
     //purpose: creates 30 X 30 X 30 Block object
     public void rebuildMesh(float startX, float startY, float startZ) {
-        int sandXmin = r.nextInt(15);
-        int sandXmax = r.nextInt(15)+15;
-        int sandZmin = r.nextInt(15);
-        int sandZmax = r.nextInt(15)+15;
-        
-        int waterXmin = r.nextInt(15);
-        int waterXmax = r.nextInt(15)+15;
-        int waterZmin = r.nextInt(15);
-        int waterZmax = r.nextInt(15)+15;
         double max = 9;
         double min = 8;
         double persistence = ((Math.random() * ((max - min) + 1)) + min )/100;
