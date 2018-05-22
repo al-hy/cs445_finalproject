@@ -23,8 +23,8 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Chunk {
-    static final int CHUNK_SIZE = 30;
-    static final int CUBE_LENGTH = 2;
+    private static final int CHUNK_SIZE = 30;
+    private static final int CUBE_LENGTH = 2;
     private Block[][][] blocks;
     private int VBOVertexHandle;
     private int VBOColorHandle;
@@ -36,12 +36,11 @@ public class Chunk {
     //constructor: Chunk
     //purpose: initializes the instance variables of Chunk
     public Chunk(int startX, int startY, int startZ) {
-        
         try {
             texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("terrain.png")); 
         }
         catch(Exception e) {
-            System.out.print("ER-ROAR!");
+            System.out.print("Texture file not found.");
         }
         
         r = new Random();
@@ -49,18 +48,19 @@ public class Chunk {
         for(int x = 0; x < CHUNK_SIZE; x++) {
             for(int y = 0; y < CHUNK_SIZE; y++) {
                 for(int z = 0; z < CHUNK_SIZE; z++) {
-                    if(r.nextFloat() > 0.7f) {
-                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
-                    } else if(r.nextFloat() > 0.6f) {
-                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
-                    } else if(r.nextFloat() > 0.4f) {
-                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
-                    } else if(r.nextFloat() > 0.2f) {
-                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
-                    } else if(r.nextFloat() > 0.1f) {
-                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
-                    } else {
+                    float random = r.nextFloat();
+                    if(y == 0) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
+                    } else if(y == 14) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
+                    } else if(random > 0.5f && y <= 13) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
+                    } else if(random <= 0.5f && y <= 13) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
+                    } else if(random > 0.3f) {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
+                    } else {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
                     }
                 }
             }

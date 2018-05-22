@@ -118,8 +118,7 @@ public class FPCameraController {
         //translate to the position vector's location 
         glTranslatef(position.x, position.y, position.z);
         FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
-        lightPosition.put(lPosition.getX()).put(
-        lPosition.getY()).put(lPosition.getZ()).put(1.0f).flip();
+        lightPosition.put(lPosition.getX()).put(lPosition.getY()).put(lPosition.getZ()).put(1.0f).flip();
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
