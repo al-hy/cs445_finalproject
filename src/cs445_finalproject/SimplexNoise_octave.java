@@ -6,7 +6,7 @@
 * assignment: Final Project
 * date last modified: 05/09/18
 *
-* purpose: 
+* purpose: A speed-improved simplex noise algorithm for 2D, 3D and 4D in Java
 *
 ****************************************************************/
 package cs445_finalproject;

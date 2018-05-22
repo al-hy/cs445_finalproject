@@ -82,6 +82,8 @@ public class MineCraft {
         glEnable(GL_LIGHT0);
     }
     
+    //method: initLightArrays
+    //purpose: initializes lightPosition and whiteLight arrays
     private void initLightArrays() {
         lightPosition = BufferUtils.createFloatBuffer(4);
         lightPosition.put(0.0f).put(0.0f).put(0.0f).put(1.0f).flip();
