@@ -126,7 +126,7 @@ public class FPCameraController {
     //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(0, -100, 0);
-        chunk = new Chunk(-25,0,-75);
+        chunk = new Chunk(-25,0,-50);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f;
