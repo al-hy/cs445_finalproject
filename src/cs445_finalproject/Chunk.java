@@ -25,6 +25,8 @@ import org.newdawn.slick.util.ResourceLoader;
 public class Chunk {
     private static final int CHUNK_SIZE = 30;
     private static final int CUBE_LENGTH = 2;
+    private static final float persistenceMin = 0.07f;
+    private static final float persistenceMax = 0.12f;
     private Block[][][] blocks;
     private int VBOVertexHandle;
     private int VBOColorHandle;
@@ -96,8 +98,12 @@ public class Chunk {
     public void rebuildMesh(float startX, float startY, float startZ) {
         double max = 9;
         double min = 8;
-        double persistence = ((Math.random() * ((max - min) + 1)) + min )/100;
-        int seed = (int)r.nextDouble();
+        Random random = new Random();
+        float persistence = 0;
+        while (persistence < persistenceMin) {
+            persistence = (persistenceMax) * random.nextFloat();
+        }
+        int seed = (int) (50 * random.nextFloat());
         SimplexNoise simplexNoise = new SimplexNoise(CHUNK_SIZE, persistence, seed);
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
@@ -105,18 +111,20 @@ public class Chunk {
         FloatBuffer VertexPositionData = BufferUtils.createFloatBuffer((CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE) * 6 * 12);
         FloatBuffer VertexColorData = BufferUtils.createFloatBuffer((CHUNK_SIZE* CHUNK_SIZE * CHUNK_SIZE) * 6 * 12);
         FloatBuffer VertexTextureData = BufferUtils.createFloatBuffer((CHUNK_SIZE* CHUNK_SIZE *CHUNK_SIZE)* 6 * 12);
-        for(float x = 0; x < CHUNK_SIZE; x += 1) {
-            for(float z = 0; z < CHUNK_SIZE; z += 1) {
+        for(float x = 0; x < CHUNK_SIZE; x++) {
+            for(float z = 0; z < CHUNK_SIZE; z++) {
                 for(float y = 0; y < CHUNK_SIZE; y++) {
                     int height = (int) (startY + Math.abs((int)(CHUNK_SIZE * simplexNoise.getNoise((int)x, (int)z))) * CUBE_LENGTH) + 15;
                     if(y == height) {
                         break;
                     }
-                    //Generate Grass at the top layer
-                    if(y == height -1 && y != 14){
+                    if(y == height - 1 && y != 14) {
                         blocks[(int)x][(int)y][(int)z] = new Block(Block.BlockType.BlockType_Grass);
                     }
-                    if(y == height -2){
+                    if(y == height - 2) {
+                        blocks[(int)x][(int)y][(int)z] = new Block(Block.BlockType.BlockType_Dirt);
+                    }
+                    if(y == height - 3 && y == 14) {
                         blocks[(int)x][(int)y][(int)z] = new Block(Block.BlockType.BlockType_Dirt);
                     }
                     VertexPositionData.put(createCube((float) (startX+ x * CUBE_LENGTH), 
