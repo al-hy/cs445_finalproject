@@ -41,9 +41,9 @@ public class FPCameraController {
         //instantiate position Vector3f to the x y z params. 
         position = new Vector3f(x, y, z);
         lPosition = new Vector3f(x, y, z);
-        lPosition.x = 0f;
-        lPosition.y = 15f;
-        lPosition.z = 0f;
+        lPosition.setX(0f);
+        lPosition.setY(15f);
+        lPosition.setZ(0f);
     }
     
     //method: yaw
@@ -65,8 +65,8 @@ public class FPCameraController {
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        position.x -= xOffset;
-        position.z += zOffset;
+        position.setX(position.getX() - xOffset);
+        position.setZ(position.getZ() + zOffset);
     }
     
     //method: walkBackwards
@@ -74,8 +74,8 @@ public class FPCameraController {
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        position.x += xOffset;
-        position.z -= zOffset;
+        position.setX(position.getX() + xOffset);
+        position.setZ(position.getZ() - zOffset);
     }
     
     //method: strafeLeft
@@ -83,8 +83,8 @@ public class FPCameraController {
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
-        position.x -= xOffset;
-        position.z += zOffset;
+        position.setX(position.getX() - xOffset);
+        position.setZ(position.getZ() + zOffset);
     }
     
     //method: strafeRight
@@ -92,20 +92,20 @@ public class FPCameraController {
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
-        position.x -= xOffset;
-        position.z += zOffset;
+        position.setX(position.getX() - xOffset);
+        position.setZ(position.getZ() + zOffset);
     }
     
     //method: moveUp
     //purpose: moves the camera up relative to its current rotation (yaw) 
     public void moveUp(float distance) {
-        position.y -= distance; 
+        position.setY(position.getY() - distance);
     }
     
     //method: moveDown
     //purpose: moves the camera down
     public void moveDown(float distance) {
-        position.y += distance; 
+        position.setY(position.getY() + distance);
     }
     
     //method: lookThrough
@@ -116,7 +116,7 @@ public class FPCameraController {
         //roatate the yaw around the Y axis 
         glRotatef(yaw, 0.0f, 1.0f, 0.0f);
         //translate to the position vector's location 
-        glTranslatef(position.x, position.y, position.z);
+        glTranslatef(position.getX(), position.getY(), position.getZ());
         FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
         lightPosition.put(lPosition.getX()).put(lPosition.getY()).put(lPosition.getZ()).put(1.0f).flip();
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
