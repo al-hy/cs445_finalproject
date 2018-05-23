@@ -55,9 +55,9 @@ public class Chunk {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
                     } else if(y == 14 && random < 0.7f) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
-                    } else if(random > 0.5f && y <= 13) {
+                    } else if(random > 0.8f && y <= 13) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
-                    } else if(random <= 0.5f && y <= 13) {
+                    } else if(random <= 0.8f && y <= 13) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
                     } else {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
