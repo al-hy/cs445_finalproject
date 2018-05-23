@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/07/18
+* date last modified: 05/23/18
 *
 * purpose: An object that holds information about a single block.
 * Holds the block's type, its position, and whether it is active

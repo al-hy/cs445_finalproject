@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/07/18
+* date last modified: 05/23/18
 *
 * purpose: An object that holds 30 X 30 X 30 Block objects.
 * Puts textures on each Block.
@@ -92,12 +92,10 @@ public class Chunk {
     //method: rebuildMesh
     //purpose: creates 30 X 30 X 30 Block object
     public void rebuildMesh(float startX, float startY, float startZ) {
-        double max = 9;
-        double min = 8;
         Random random = new Random();
         float persistence = 0;
-        while (persistence < persistenceMin) {
-            persistence = (persistenceMax) * random.nextFloat();
+        while(persistence < persistenceMin) {
+            persistence = persistenceMax * random.nextFloat();
         }
         int seed = (int) (50 * random.nextFloat());
         SimplexNoise simplexNoise = new SimplexNoise(CHUNK_SIZE, persistence, seed);
@@ -127,7 +125,6 @@ public class Chunk {
                             (float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)), (float) (startZ + z * CUBE_LENGTH)));
                     VertexColorData.put(createCubeVertexCol(getCubeColor(blocks[(int) x][(int) y][(int) z])));
                     VertexTextureData.put(createTexCube((float) 0, (float)0,blocks[(int)(x)][(int) (y)][(int) (z)]));
-
                 }
             }
         }

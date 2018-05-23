@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/07/18
+* date last modified: 05/23/18
 *
 * purpose: Moves the camera's position using the keys w, a, s, d, 
 * left shift, and space. Moves the camera's view on a point using 

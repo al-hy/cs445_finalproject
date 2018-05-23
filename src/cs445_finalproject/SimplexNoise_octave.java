@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/09/18
+* date last modified: 05/23/18
 *
 * purpose: A speed-improved simplex noise algorithm for 2D, 3D and 4D in Java
 *
