@@ -23,7 +23,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Chunk {
-    private static final int CHUNK_SIZE = 30;
+    private static final int CHUNK_SIZE = 90;
     private static final int CUBE_LENGTH = 2;
     private static final float persistenceMin = 0.07f;
     private static final float persistenceMax = 0.12f;
