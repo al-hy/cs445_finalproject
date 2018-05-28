@@ -73,6 +73,7 @@ public class MineCraft {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_TEXTURE_2D);
         glEnableClientState (GL_TEXTURE_COORD_ARRAY);
+        
         initLightArrays();
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
         glLight(GL_LIGHT0, GL_SPECULAR, whiteLight);
@@ -90,7 +91,6 @@ public class MineCraft {
         
         whiteLight = BufferUtils.createFloatBuffer(4);
         whiteLight.put(1.0f).put(1.0f).put(1.0f).put(0.0f).flip();
-
     }
     
     //method: main

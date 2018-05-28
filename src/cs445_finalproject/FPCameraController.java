@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/23/18
+* date last modified: 05/28/18
 *
 * purpose: Moves the camera's position using the keys w, a, s, d, 
 * left shift, and space. Moves the camera's view on a point using 
@@ -125,8 +125,8 @@ public class FPCameraController {
     //method: gameLoop
     //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
-        FPCameraController camera = new FPCameraController(0, -100, 0);
-        chunk = new Chunk(-25,0,-50);
+        FPCameraController camera = new FPCameraController(-50, -150, -50);
+        chunk = new Chunk(-50,0,-100);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f;

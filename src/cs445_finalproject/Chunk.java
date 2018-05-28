@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/23/18
+* date last modified: 05/28/18
 *
 * purpose: An object that holds 30 X 30 X 30 Block objects.
 * Puts textures on each Block.
