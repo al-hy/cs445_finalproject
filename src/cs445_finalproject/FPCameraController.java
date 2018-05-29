@@ -65,8 +65,13 @@ public class FPCameraController {
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        position.setX(position.getX() - xOffset);
-        position.setZ(position.getZ() + zOffset);
+        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+            position.setX(position.getX() - xOffset);
+            position.setZ(position.getZ() + zOffset);
+        } else {
+            position.setX(position.getX());
+            position.setZ(position.getZ());
+        }
     }
     
     //method: walkBackwards
@@ -74,8 +79,13 @@ public class FPCameraController {
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        position.setX(position.getX() + xOffset);
-        position.setZ(position.getZ() - zOffset);
+        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+            position.setX(position.getX() + xOffset);
+            position.setZ(position.getZ() - zOffset);
+        } else {
+            position.setX(position.getX());
+            position.setZ(position.getZ());
+        }
     }
     
     //method: strafeLeft
@@ -83,8 +93,13 @@ public class FPCameraController {
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
-        position.setX(position.getX() - xOffset);
-        position.setZ(position.getZ() + zOffset);
+        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+            position.setX(position.getX() - xOffset);
+            position.setZ(position.getZ() + zOffset);
+        } else {
+            position.setX(position.getX());
+            position.setZ(position.getZ());
+        }
     }
     
     //method: strafeRight
@@ -92,8 +107,13 @@ public class FPCameraController {
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
-        position.setX(position.getX() - xOffset);
-        position.setZ(position.getZ() + zOffset);
+        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+            position.setX(position.getX() - xOffset);
+            position.setZ(position.getZ() + zOffset);
+        } else {
+            position.setX(position.getX());
+            position.setZ(position.getZ());
+        }
     }
     
     //method: moveUp
@@ -126,7 +146,7 @@ public class FPCameraController {
     //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(-50, -150, -50);
-        chunk = new Chunk(-50,0,-100);
+        chunk = new Chunk(-50,0,-100);//(50/-130, -90/90, 100/-80)
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f;
