@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/23/18
+* date last modified: 05/29/18
 *
 * purpose: Creates a 640 x 480 window that allows the user to 
 * view a cube with six different colored sides. The user can move

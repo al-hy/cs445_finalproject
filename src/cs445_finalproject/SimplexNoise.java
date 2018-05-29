@@ -4,7 +4,7 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/23/18
+* date last modified: 05/29/18
 *
 * purpose: Creates a smooth up and down pattern.
 *

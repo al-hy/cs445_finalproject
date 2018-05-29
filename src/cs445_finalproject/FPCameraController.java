@@ -4,11 +4,12 @@
 * class: CS 445 – Computer Graphics
 *
 * assignment: Final Project
-* date last modified: 05/28/18
+* date last modified: 05/29/18
 *
 * purpose: Moves the camera's position using the keys w, a, s, d, 
 * left shift, and space. Moves the camera's view on a point using 
-* the mouse.
+* the mouse. Camera does boundary checking for x:[-130, 50] and
+* z: [-80, 100].
 *
 ****************************************************************/
 
@@ -62,6 +63,7 @@ public class FPCameraController {
     
     //method: walkForward
     //purpose: moves the camera forward in the direction it is facing
+    // boundary checking x:[-130, 50] and z: [-80, 100]
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
@@ -73,7 +75,8 @@ public class FPCameraController {
     }
     
     //method: walkBackwards
-    //purpose: moves the camera backward relative to its current rotation (yaw) 
+    //purpose: moves the camera backward relative to its current rotation (yaw)
+    // boundary checking x:[-130, 50] and z: [-80, 100]
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
@@ -86,6 +89,7 @@ public class FPCameraController {
     
     //method: strafeLeft
     //purpose: strafes the camera left relative to its current rotation (yaw) 
+    // boundary checking x:[-130, 50] and z: [-80, 100]
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
@@ -98,6 +102,7 @@ public class FPCameraController {
     
     //method: strafeRight
     //purpose: strafes the camera right relative to its current rotation (yaw) 
+    // boundary checking x:[-130, 50] and z: [-80, 100]
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
@@ -144,7 +149,7 @@ public class FPCameraController {
     //purpose: allows the user to control the view and position of the camera
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(-50, -150, -50);
-        chunk = new Chunk(-50,0,-100);//(50/-130, -90/90, 100/-80)
+        chunk = new Chunk(-50,0,-100);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f;
