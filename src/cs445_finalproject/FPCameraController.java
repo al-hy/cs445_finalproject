@@ -78,7 +78,7 @@ public class FPCameraController {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
         //System.out.println("Walking Backwards: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
-        if((position.getX() - xOffset) < 50 && (position.getX() - xOffset) > -130 && (position.getZ() + zOffset) < 100 && (position.getZ() + zOffset) > -80) {
+        if((position.getX() + xOffset) < 50 && (position.getX() + xOffset) > -130 && (position.getZ() - zOffset) < 100 && (position.getZ() - zOffset) > -80) {
             position.setX(position.getX() + xOffset);
             position.setZ(position.getZ() - zOffset);
         }
