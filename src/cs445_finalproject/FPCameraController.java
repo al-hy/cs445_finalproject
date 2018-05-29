@@ -65,12 +65,10 @@ public class FPCameraController {
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+        //System.out.println("Walking Forward: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        if((position.getX() - xOffset) < 50 && (position.getX() - xOffset) > -130 && (position.getZ() + zOffset) < 100 && (position.getZ() + zOffset) > -80) {
             position.setX(position.getX() - xOffset);
             position.setZ(position.getZ() + zOffset);
-        } else {
-            position.setX(position.getX());
-            position.setZ(position.getZ());
         }
     }
     
@@ -79,12 +77,10 @@ public class FPCameraController {
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
-        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+        //System.out.println("Walking Backwards: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        if((position.getX() - xOffset) < 50 && (position.getX() - xOffset) > -130 && (position.getZ() + zOffset) < 100 && (position.getZ() + zOffset) > -80) {
             position.setX(position.getX() + xOffset);
             position.setZ(position.getZ() - zOffset);
-        } else {
-            position.setX(position.getX());
-            position.setZ(position.getZ());
         }
     }
     
@@ -93,12 +89,10 @@ public class FPCameraController {
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90)); 
-        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+        //System.out.println("Walking Left: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        if((position.getX() - xOffset) < 50 && (position.getX() - xOffset) > -130 && (position.getZ() + zOffset) < 100 && (position.getZ() + zOffset) > -80) {
             position.setX(position.getX() - xOffset);
             position.setZ(position.getZ() + zOffset);
-        } else {
-            position.setX(position.getX());
-            position.setZ(position.getZ());
         }
     }
     
@@ -107,25 +101,29 @@ public class FPCameraController {
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90)); 
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
-        if(position.getX() + xOffset < 50 && position.getX() + xOffset > -130 && position.getZ() - zOffset < 100 && position.getZ() - zOffset > -80) {
+        //System.out.println("Walking Right: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        if((position.getX() - xOffset) < 50 && (position.getX() - xOffset) > -130 && (position.getZ() + zOffset) < 100 && (position.getZ() + zOffset) > -80) {
             position.setX(position.getX() - xOffset);
             position.setZ(position.getZ() + zOffset);
-        } else {
-            position.setX(position.getX());
-            position.setZ(position.getZ());
         }
     }
     
     //method: moveUp
     //purpose: moves the camera up relative to its current rotation (yaw) 
     public void moveUp(float distance) {
-        position.setY(position.getY() - distance);
+        //System.out.println("Walking Up: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        //if(position.getY() - distance < -170) {
+            position.setY(position.getY() - distance);
+        //}
     }
     
     //method: moveDown
     //purpose: moves the camera down
     public void moveDown(float distance) {
-        position.setY(position.getY() + distance);
+        //System.out.println("Walking Up: X: " + position.getX() + " Y: " + position.getY() + " Z: " + position.getZ());
+        //if(position.getY() - distance > -65 ){
+            position.setY(position.getY() + distance);
+        //}
     }
     
     //method: lookThrough
