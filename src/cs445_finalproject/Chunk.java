@@ -59,8 +59,10 @@ public class Chunk {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
                     } else if(random <= 0.8f && y <= 13) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
-                    } else {
+                    } else if(y == 14 && random > 0.7f) {
                         blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
+                    } else {
+                        blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
                     }
                 }
             }
